@@ -67,6 +67,7 @@ void mergeSort(int arr[],int n){
     //else printArray(temp,n);
   }
   if(!flag)move(temp,0,n,arr);
+  delete [] temp;
 }
 
 int main(){
