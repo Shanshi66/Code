@@ -26,6 +26,7 @@ void mergeArray(int from[],int l,int m,int r,int to[]){
 }
 
 void mergeSort(int arr[],int n){
+  //无回移，合并最长有序序列
   //temp为临时中转数组，flag标明当前有序数组存储在哪个数组中
   int *temp = new int[n];
   bool flag=true;
@@ -47,24 +48,38 @@ void mergeSort(int arr[],int n){
       que.pop();
       //需要处理连续序列段数的奇偶问题
       if(m<n){
-        r=que.front();
-        que.pop();
-        if(flag)mergeArray(arr,l,m,r,temp);
-        else mergeArray(temp,l,m,r,arr);
+        r=que.front(),que.pop();
+        flag?mergeArray(arr,l,m,r,temp):mergeArray(temp,l,m,r,arr);
         //更新连续序列
         que.push(r);
       }else{
         //奇数情况
-        if(flag)move(arr,l,m,temp);
-        else move(temp,l,m,arr);
+        flag?move(arr,l,m,temp):move(temp,l,m,arr);
         que.push(m);
       }
       l=que.back();
     }
     //已全部合并到另一数组中
     flag=!flag;
-    //if(flag)printArray(arr,n);
-    //else printArray(temp,n);
+  }
+  if(!flag)move(temp,0,n,arr);
+  delete [] temp;
+}
+
+void mergeSort2(int arr[],int n){
+  int *temp = new int[n];
+  bool flag = true;
+  //步长以两倍的速度增加
+  for(int step=1;step<n;step<<=1){
+    int l=0,m,r;
+    while(l<n){
+      m=l+step,r=m+step;
+      if(m>n)flag?move(arr,l,n,temp):move(temp,l,n,arr);
+      else if(r>n)flag?mergeArray(arr,l,m,n,temp):mergeArray(temp,l,m,n,arr);
+      else flag?mergeArray(arr,l,m,r,temp):mergeArray(temp,l,m,r,arr);
+      l=r<n?r:n;
+    }
+    flag=!flag;
   }
   if(!flag)move(temp,0,n,arr);
   delete [] temp;
@@ -76,7 +91,8 @@ int main(){
   cin>>n;
   int *arr = new int[n];
   for(int i=0;i<n;i++)cin>>arr[i];
-  mergeSort(arr,n);
+  //mergeSort(arr,n);
+  mergeSort2(arr,n);
   printArray(arr,n);
   delete [] arr;
   return 0;
