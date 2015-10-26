@@ -66,7 +66,9 @@ void mergeSort(int arr[],int n){
   delete [] temp;
 }
 
+
 void mergeSort2(int arr[],int n){
+  //无回移非递归实现
   int *temp = new int[n];
   bool flag = true;
   //步长以两倍的速度增加
