@@ -1,6 +1,5 @@
 //算法课作业
 //求A,B集合的(A-B)+(B-A)
-
 #include <cstdio>
 #include <iostream>
 #include <iostream>
@@ -47,7 +46,6 @@ void solve2(int a[],int size_a,int b[],int size_b,int c[],int &size_c){
   if(i>=size_a)while(j<size_b)c[size_c++]=b[j++];
   if(j>=size_b)while(i<size_a)c[size_c++]=a[i++];
 }
-
 
 int main(){
   freopen("in.txt","r",stdin);
