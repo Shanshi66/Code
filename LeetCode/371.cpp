@@ -3,11 +3,12 @@
 using namespace std;
 
 class Solution {
+    //模拟
 public:
     int getSum(int a, int b) {
-        int sum=0, c=1;
+        int sum=0, c=1, i=0;
         bool last=0;
-        while(a||b){
+        while((a||b)&&i++<32){
             bool cur;
             if(a&b&1)cur = 0|last, last=1;
             else if((a&1)|(b&1)){
@@ -25,7 +26,21 @@ public:
     }
 };
 
+class Solution2{
+public:
+    int getSum(int a, int b){
+        while(b){
+            int carry = a&b;
+            a = a^b;
+            b = carry<<1;
+        }
+        return a;
+    }
+};
+
 int main(){
-    
+    Solution2 a;
+    int sum = a.getSum(-2, 1);
+    cout<<sum<<endl;
     return 0;
 }
