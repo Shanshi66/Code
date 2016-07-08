@@ -4,7 +4,7 @@ using namespace std;
 
 class Solution {
 public:
-    int getSum(int a, int b) {
+    int getSum(int a, int b){
         int sum=0, c=1;
         bool last=0;
         while(a||b){
