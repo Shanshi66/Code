@@ -13,7 +13,7 @@ bool cmp(const Person &a, const Person &b){
 }
 
 int main(){
-    freopen("A-large.in", "r", stdin);
+    freopen("A-large-practice.in", "r", stdin);
     freopen("ans.out", "w", stdout);
     int t, tcase = 0;
     cin >> t;
@@ -27,7 +27,10 @@ int main(){
             int len; set<char> stat;
             getline(cin, persons[i].name);
             len = persons[i].name.length();
-            for(int j = 0; j < len; j++)stat.insert(persons[i].name[j]); 
+            for(int j = 0; j < len; j++){
+                if(persons[i].name[j]!=' ')
+                    stat.insert(persons[i].name[j]);
+            }
             persons[i].cnt = stat.size();
         }
         sort(persons.begin(), persons.end(), cmp);

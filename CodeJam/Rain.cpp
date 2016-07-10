@@ -67,8 +67,8 @@ void init(){
 }
 
 int main(){
-    //freopen("B-large.in", "r", stdin);
-    //freopen("ans.out", "w", stdout);
+    freopen("B-large.in", "r", stdin);
+    freopen("ans.out", "w", stdout);
     int t, tcase = 0;
     cin >> t;
     while(t--){
