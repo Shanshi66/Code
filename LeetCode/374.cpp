@@ -2,6 +2,7 @@ int guess(int num);
 
 class Solution {
 public:
+    // 二分查找
     int guessNumber(int n) {
         int l = 0, r = n, m;
         while(l <= r){
