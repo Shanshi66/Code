@@ -32,3 +32,26 @@ public:
         return ans;
     }
 };
+
+
+class Solution {
+public:
+    //贪心，看成一条折线段，取其端点
+    int wiggleMaxLength(vector<int>& nums) {
+        int size_nums = nums.size();
+        if(size_nums < 2) return size_nums;
+        int count = 1, flag = 0;
+        for(int i = 1; i < size_nums; i++){
+            if(nums[i] != nums[i - 1]){
+                if(flag == 0) flag = (nums[i] > nums[i - 1]) ? 1 : -1;
+                else if(flag == 1) {
+                    if(nums[i] < nums[i - 1]) flag = -1, count++;
+                }
+                else {
+                    if(nums[i] > nums[i - 1]) flag = 1, count++;
+                }
+            }
+        }
+        return count + 1;
+    }   
+};
