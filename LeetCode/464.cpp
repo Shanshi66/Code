@@ -1,3 +1,6 @@
+/*
+    记忆化搜索，以二进制标志状态
+*/
 class Solution {
 public:
     bool canIWin(int maxChoosableInteger, int desiredTotal) {
