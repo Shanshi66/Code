@@ -40,3 +40,69 @@ public:
         return dp[sp][pp] = flag;
     }
 };
+
+
+
+/*
+基于这样一个事实：存在两个'*'时，第一个'*'如果有两种匹配方式，和第二个'*'有两种匹配方式等同．只需考虑后一个'*'能否匹配．
+如
+acabcbca
+a*b*a
+第一个'*'有两种匹配方式，ca, cabc. 只需匹配到第一个ｂ就行
+第二个'*'匹配cbc
+*/
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int m = s.length(), n = p.length();
+        int i = 0, j = 0, asterisk = -1, match;
+        while (i < m) {
+            if (j < n && p[j] == '*') {
+                match = i; 
+                asterisk = j++;
+            }
+            else if (j < n && (s[i] == p[j] || p[j] == '?')) {
+                i++; 
+                j++;
+            }
+            else if (asterisk >= 0) {
+                i = ++match;
+                j = asterisk + 1;
+            }
+            else return false;
+        }
+        while (j < n && p[j] == '*') j++;
+        return j == n;
+    }
+};
+
+
+/*
+非递归写法
+*/
+
+public class Solution {
+    public boolean isMatch(String s, String p) {
+        boolean[][] match=new boolean[s.length()+1][p.length()+1];
+        match[s.length()][p.length()]=true;
+        for(int i=p.length()-1;i>=0;i--){
+            if(p.charAt(i)!='*')
+                break;
+            else
+                match[s.length()][i]=true;
+        }
+        for(int i=s.length()-1;i>=0;i--){
+            for(int j=p.length()-1;j>=0;j--){
+                if(s.charAt(i)==p.charAt(j)||p.charAt(j)=='?')
+                        match[i][j]=match[i+1][j+1];
+                else if(p.charAt(j)=='*')
+                        match[i][j]=match[i+1][j]||match[i][j+1];
+                else
+                    match[i][j]=false;
+            }
+        }
+        return match[0][0];
+    }
+}
+
