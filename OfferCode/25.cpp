@@ -4,6 +4,8 @@
 思路：分两步走，第一步先复制主链表，第二步在连接Random连接。
 
 注意：空指针处理，包括空链表和random指空的情况
+
+可以使用hash表优化，将A与A'对应起来，这样就不用向前向后找了
 */
 
 /*
@@ -83,4 +85,70 @@ public:
         }
         return p_behind;
     }
+};
+
+
+/*
+剑指offer上的解法：
+1. 先将每个节点复制后放在原始节点后：如A->B => A->A'->B->B'
+2. 然后连接random，A如果和B相连，则A'和B'相连
+3. 将链表拆分成两个链表
+代码如下：
+
+*/
+
+
+/*
+struct RandomListNode {
+    int label;
+    struct RandomListNode *next, *random;
+    RandomListNode(int x) :
+            label(x), next(NULL), random(NULL) {
+    }
+};
+*/
+
+class Solution {
+public:
+    RandomListNode* Clone(RandomListNode* pHead){
+        if(pHead == NULL) return pHead;
+        cloneNodes(pHead);
+        linkRandom(pHead);
+        return splitList(pHead);
+    }
+    
+    void cloneNodes(RandomListNode* p_head) {
+        while(p_head != NULL) {
+            RandomListNode* new_node = new RandomListNode(p_head->label);
+           	RandomListNode* tmp = p_head->next;
+            p_head->next = new_node;
+            new_node->next = tmp;
+            p_head = p_head->next->next;
+        }
+    }
+    
+    void linkRandom(RandomListNode* p_head){
+        while(p_head != NULL) {
+            if(p_head->random != NULL) {
+              	p_head->next->random = p_head->random->next;
+            }
+            p_head = p_head->next->next;
+        }
+    }
+    
+    RandomListNode* splitList(RandomListNode* p_head){
+        RandomListNode* p_old = p_head;
+        RandomListNode* p_new_head = p_head->next;
+        RandomListNode* p_new = p_new_head;
+        while(p_new->next != NULL) {
+            p_old->next = p_new->next;
+            p_old = p_old->next;
+            p_new->next = p_old->next;
+            p_new = p_new->next;
+        }
+        p_old->next = NULL;
+        p_new->next = NULL;
+        return p_new_head;
+    }
+    
 };
