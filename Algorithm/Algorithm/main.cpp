@@ -3,6 +3,7 @@
 #include "Sort/QuickSort.h"
 #include "Sort/MergeSort.h"
 #include "Sort/CountingSort.h"
+#include "Sort/InsertSort.h"
 
 using namespace std;
 
@@ -19,7 +20,8 @@ int main() {
 	// quickSort(array, 0, array.size() - 1);
     // mergeSortRecursive(array, 0, array.size());
     // mergeSortNonRecursive(array);
-    countingSort(array, 200);
+    // countingSort(array, 200);
+    insertSort(array);
     printArray(array, 0, array.size());
 	getchar();
 	return 0;
