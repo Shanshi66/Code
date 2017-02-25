@@ -49,7 +49,7 @@ void mergeSortNonRecursive(vector<int> &array) {
         step <<= 1;
         inArray = !inArray;
     }
-    if (!inArray) mergeToArray(tmp_array, array, 0, len, len);
+    if (!inArray) array.swap(tmp_array);
 }
 
 
