@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <cmath>
+#include <algorithm>
 
 using namespace std;
 void printArray(const vector<int> &array, int begin, int end) {
