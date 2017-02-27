@@ -32,13 +32,14 @@ int partion(vector<int> &array, int begin, int end) {
 int partion2(vector<int> &array, int begin, int end) {
 	int pivot = randIndex(begin, end);
 	swap(array[pivot], array[end]);
-	int l = begin, r = end;
+	int l = begin, r = end, key = array[end];
     while (l < r) {
-        while (l < r && array[l] <= array[r]) l++;
-        swap(array[l], array[r]);
-        while (l < r && array[l] <= array[r]) r--;
-        swap(array[l], array[r]);
+        while (l < r && array[l] <= key) l++;
+        if (l < r) array[r--] = array[l];
+        while (l < r && array[r] >= array[l]) r--;
+        if (l < r) array[l++] = array[r];
     }
+    array[l] = key;
     return l;
 }
 

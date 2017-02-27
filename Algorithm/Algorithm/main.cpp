@@ -17,11 +17,11 @@ int main() {
 	}
 	printArray(array, 0, array.size());
 	// heapSort(array);
-	// quickSort(array, 0, array.size() - 1);
+	quickSort(array, 0, array.size() - 1);
     // mergeSortRecursive(array, 0, array.size());
     // mergeSortNonRecursive(array);
     // countingSort(array, 200);
-    insertSort(array);
+    // insertSort(array);
     printArray(array, 0, array.size());
 	getchar();
 	return 0;
