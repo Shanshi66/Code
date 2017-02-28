@@ -52,26 +52,27 @@ public:
  * int param_1 = obj.pick(target);
  */
 
-
 class Solution {
 public:
     vector<int> nums;
-    int index;
     Solution(vector<int> nums) {
-        this.nums = nums;
-        index = 0;
+        this->nums = nums;
     }
-    
     int pick(int target) {
-        int ans = -1;
-        for(int i = index + 1; i != index; i++) {
-            if(i == nums.size()) i = 0;
-            if(nums[i] == target) {
-                ans = index = i;
-                break;
+        int count = 0, res = 0, size = nums.size();
+        for(int i = 0; i < size; i++) {
+            if(nums[i] != target) continue;
+            count++;
+            if(rand() % count == 0) {
+                res = i;
             }
         }
-        ans = index;
-        return ans;
+        return res;
     }
 };
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(nums);
+ * int param_1 = obj.pick(target);
+ */
