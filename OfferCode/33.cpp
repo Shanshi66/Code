@@ -17,15 +17,12 @@ public:
         int t2 = 0, t3 = 0, t5 = 0, count = 1;
         while(count < index) {
             int m1, m2, m3;
-            while((m1 = ugly_numbers[t2] * 2) < ugly_numbers[count - 1]) t2++;
-            while((m2 = ugly_numbers[t3] * 3) < ugly_numbers[count - 1]) t3++;
-            while((m3 = ugly_numbers[t5] * 5) < ugly_numbers[count - 1]) t5++;
-            int _min = min(min(m1, m2), m3);
+            int _min = min(min(ugly_numbers[t2] * 2, ugly_numbers[t3] * 3), ugly_numbers[t5] * 5);
             ugly_numbers.push_back(_min);
-            if(_min / 2 == ugly_numbers[t2]) t2++;
-            if(_min / 3 == ugly_numbers[t3]) t3++;
-            if(_min / 5 == ugly_numbers[t5]) t5++;
             count++;
+            while(ugly_numbers[t2] * 2 <= ugly_numbers[count - 1]) t2++;
+            while(ugly_numbers[t3] * 3 <= ugly_numbers[count - 1]) t3++;
+            while(ugly_numbers[t5] * 5 <= ugly_numbers[count - 1]) t5++;
         }
         return ugly_numbers[count - 1];
     }
