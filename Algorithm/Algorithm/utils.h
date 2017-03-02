@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 void printArray(const vector<int> &array, int begin, int end) {
