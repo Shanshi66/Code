@@ -5,18 +5,30 @@
 #include "Sort/CountingSort.h"
 #include "Sort/InsertSort.h"
 #include "Random/ReservoirSampling.h"
+#include "Search/BinarySearch.h"
+#include "Tree/Travel.h"
 
 using namespace std;
 
 int main() {
-    const int len = 17;
-	int arr[len] = {3,21,2,45,3,64,32,1,4,6,6,23,12,34,23,124,46};
+	int arr[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14};
 	vector<int> array;
-	for (int i = 0; i < len; i++) {
-		array.push_back(arr[i]);
+	for (auto x : arr) {
+		array.push_back(x);
 	}
-    vector<int> sample = reservoirSamplingByHeap(array, 6);
-    printArray(sample, 0, sample.size());
+    TreeNode *root = createTree(array, 0);
+    middleOrderRecursive(root);
+    cout << endl;
+    middleOrderNonRecursive(root);
+    cout << endl;
+    beforeOrderRecursive(root);
+    cout << endl;
+    beforeOrderNonRecursive(root);
+    cout << endl;
+    afterOrderRecursive(root);
+    cout << endl;
+    afterOrderNonRecursive(root);
+    cout << endl;
 	getchar();
 	return 0;
 }
