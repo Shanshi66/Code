@@ -6,3 +6,24 @@
 注意：如果两张排相同，那也不是顺子
 
 */
+
+class Solution {
+public:
+    bool IsContinuous( vector<int> numbers ) {
+        sort(numbers.begin(), numbers.end());
+        int zeroCnt = 0;
+        if(numbers.size() > 13 || numbers.size() == 0) return false;
+        typedef vector<int>::iterator iiter;
+        for(iiter iter = numbers.begin(); iter < numbers.end(); iter++) {
+            if(iter == numbers.end() - 1) break;
+            if(*iter == 0) zeroCnt++;
+            else {
+                int diff = *(iter + 1) - *iter;
+                if(diff == 0) zeroCnt = -1;
+              	else zeroCnt -= diff - 1;
+            }
+        }
+        if(zeroCnt < 0) return false;
+       	else return true;
+    }
+};
