@@ -1,8 +1,17 @@
-#include <iostream>
-#include "Singleton/SingletonMutithread.h"
+#include "utils.h"
+#include "Singleton/Singleton.h"
+
+using namespace std;
+using namespace Single;
+
+void createInstance() {
+    Singleton2 *instance = Singleton2::getInstance();
+}
 
 int main() {
-    Singleton a = Singleton::getInstance();
+    thread t(createInstance);
+    Singleton2 *instance = Singleton2::getInstance();
+    t.join();
     getchar();
     return 0;
 }
