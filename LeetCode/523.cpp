@@ -47,3 +47,36 @@ public:
         return ans;
     }
 };
+
+/*
+discuss做法：
+假设sum[i]表示前i个数的所有元素的和，则(i,j]的元素和为sum[j] - sum[i];
+(sum[j] - sum[i]) % k = 0;
+则sum[j] % k = sum[i] % k
+*/
+
+
+class Solution {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        int n = nums.size(), sum = 0;
+        map<int, int> sum2Index;
+        sum2Index[0] = -1; //第一个元素
+        bool flag = false;
+        for(int i = 0; i < n; i++) {
+            sum += nums[i];
+            if(k != 0) sum %= k;
+            int left;
+            if(sum2Index.find(sum) != sum2Index.end()) {
+                left = sum2Index[sum];
+                if(i - left > 1) {
+                    flag = true;
+                    break;
+                }
+            } else {
+                sum2Index[sum] = i;
+            }
+        }
+        return flag;
+    }
+};
